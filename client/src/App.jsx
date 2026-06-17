@@ -65,7 +65,7 @@ function App() {
   return (
     <div className="page">
       <div className="card">
-        <h1>MERN App Auto Deployed with CI/CD</h1>
+        <h1>MERN App Auto Deployed with CI/CD BY PRAVEENA KURUKULADITHYA</h1>
         <p className="subtitle">
           React frontend + Express backend + MongoDB database
         </p>
