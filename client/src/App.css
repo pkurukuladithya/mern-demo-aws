@@ -1,4 +1,92 @@
-.app {
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
   font-family: Arial, sans-serif;
-  margin: 2rem;
+  background: #eef4f8;
+}
+
+.page {
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 30px;
+}
+
+.card {
+  width: 100%;
+  max-width: 620px;
+  background: white;
+  border-radius: 22px;
+  padding: 35px;
+  box-shadow: 0 12px 35px rgba(0, 0, 0, 0.12);
+}
+
+h1 {
+  color: #ff7a00;
+  text-align: center;
+  margin-bottom: 8px;
+}
+
+.subtitle {
+  text-align: center;
+  color: #333;
+  margin-bottom: 28px;
+}
+
+.form {
+  display: flex;
+  gap: 10px;
+}
+
+input {
+  flex: 1;
+  padding: 14px;
+  border: 1px solid #ccc;
+  border-radius: 10px;
+  font-size: 16px;
+}
+
+button {
+  padding: 14px 18px;
+  border: none;
+  border-radius: 10px;
+  background: #ff7a00;
+  color: white;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+.message {
+  margin-top: 15px;
+  text-align: center;
+  color: #008060;
+}
+
+.list {
+  margin-top: 25px;
+}
+
+.task {
+  background: #f7f9fb;
+  border: 1px solid #e0e6eb;
+  border-radius: 12px;
+  padding: 14px;
+  margin-bottom: 10px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.task button {
+  background: #d93025;
+  padding: 8px 12px;
+}
+
+.empty {
+  text-align: center;
+  color: #777;
 }
