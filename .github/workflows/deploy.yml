@@ -1,4 +1,4 @@
-name: Deploy
+name: Deploy MERN App to AWS EC2
 
 on:
   push:
@@ -6,19 +6,65 @@ on:
       - main
 
 jobs:
-  build:
+  deploy:
+    name: Build and Deploy
     runs-on: ubuntu-latest
+
     steps:
-      - uses: actions/checkout@v4
-      - name: Set up Node.js
+      - name: Get latest code
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
         uses: actions/setup-node@v4
         with:
-          node-version: '18'
+          node-version: 22
+
       - name: Install backend dependencies
+        working-directory: backend
+        run: npm install
+
+      - name: Install frontend dependencies
+        working-directory: client
+        run: npm install
+
+      - name: Build React frontend
+        working-directory: client
+        run: npm run build
+
+      - name: Prepare SSH key
         run: |
-          cd backend
-          npm install
-      - name: Install client dependencies
+          mkdir -p ~/.ssh
+          echo "${{ secrets.EC2_SSH_KEY }}" > ~/.ssh/ec2_key
+          chmod 600 ~/.ssh/ec2_key
+          ssh-keyscan -H "${{ secrets.EC2_HOST }}" >> ~/.ssh/known_hosts
+
+      - name: Upload backend to EC2
         run: |
-          cd client
-          npm install
+          rsync -az --delete \
+            --exclude ".env" \
+            --exclude "node_modules" \
+            -e "ssh -i ~/.ssh/ec2_key" \
+            backend/ ${{ secrets.EC2_USER }}@${{ secrets.EC2_HOST }}:/home/ubuntu/mern-demo/backend/
+
+      - name: Upload frontend build to EC2
+        run: |
+          rsync -az --delete \
+            -e "ssh -i ~/.ssh/ec2_key" \
+            client/dist/ ${{ secrets.EC2_USER }}@${{ secrets.EC2_HOST }}:/var/www/mern-demo/
+
+      - name: Restart backend and reload Nginx
+        run: |
+          ssh -i ~/.ssh/ec2_key ${{ secrets.EC2_USER }}@${{ secrets.EC2_HOST }} <<'EOF'
+            export NVM_DIR="$HOME/.nvm"
+            [ -s "$NVM_DIR/nvm.sh" ] && . "$NVM_DIR/nvm.sh"
+            nvm use 22
+
+            cd /home/ubuntu/mern-demo/backend
+            npm install --omit=dev
+
+            pm2 restart mern-api || pm2 start server.js --name mern-api
+            pm2 save
+
+            sudo nginx -t
+            sudo systemctl reload nginx
+          EOF
