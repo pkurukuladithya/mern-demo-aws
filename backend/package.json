@@ -6,9 +6,11 @@
     "start": "node server.js"
   },
   "dependencies": {
+    "bcryptjs": "latest",
     "cors": "latest",
     "dotenv": "latest",
     "express": "latest",
+    "jsonwebtoken": "latest",
     "mongoose": "latest"
   }
 }
