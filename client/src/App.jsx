@@ -257,25 +257,26 @@ function App() {
     return (
       <main className="public-shell">
         <nav className="public-nav">
-          <div className="brand-mark">
-            <span>saviya</span>
-            <strong>සවිය</strong>
-          </div>
+          <LogoMark />
           <button className="ghost-button" onClick={() => document.getElementById("auth")?.scrollIntoView()}>
             Parent login
           </button>
         </nav>
 
-        <section className="hero">
+        <section className="flyer-hero">
           <div className="hero-copy">
-            <div className="eyebrow">Primary school parent support</div>
+            <LogoMark size="hero" />
+            <p className="hero-kicker">Sri Lanka's First Parent Helpdesk Platform for Primary Schools</p>
             <h1>Saviya - Smart Parent Helpdesk for Primary Schools</h1>
             <div className="sinhala-title">සවිය</div>
             <p className="tagline">Ask. Ticket. Track. Get Answered.</p>
             <p className="hero-description">
-              A simple helpdesk platform for Sri Lankan parents to raise
-              school-related questions and get clear responses from responsible staff.
+              A simple helpdesk platform for Sri Lankan parents to raise school-related
+              questions and get clear responses from responsible staff.
             </p>
+            <div className="quote-card">
+              දරුවාගේ අධ්‍යාපන ගැටළුවෙන්, ඔබේ ගැටළුවට නිවැරදි පිළිතුරක්.
+            </div>
             <div className="hero-actions">
               <button onClick={() => document.getElementById("auth")?.scrollIntoView()}>
                 Get started
@@ -286,54 +287,110 @@ function App() {
             </div>
           </div>
 
-          <div className="hero-panel" aria-label="Saviya dashboard preview">
-            <div className="panel-top">
-              <span>Today</span>
-              <strong>12 parent questions</strong>
-            </div>
-            <div className="preview-card urgent">
-              <span>Urgent</span>
-              <strong>Transport change for Grade 3</strong>
-              <p>Waiting for school office response</p>
-            </div>
-            <div className="preview-grid">
-              <div>
-                <strong>8</strong>
-                <span>Open</span>
-              </div>
-              <div>
-                <strong>6</strong>
-                <span>Answered</span>
+          <div className="family-hero-card" aria-label="Parent and child using Saviya">
+            <div className="family-visual">
+              <div className="person parent-person" />
+              <div className="person child-person" />
+              <div className="phone-card">
+                <span>saviya</span>
+                <strong>12</strong>
+                <small>My Tickets</small>
               </div>
             </div>
-            <div className="chat-preview">
-              <span>Parent</span>
-              <p>Teacher said bring something tomorrow?</p>
-              <span>Responder</span>
-              <p>Please send the class note photo. We will confirm.</p>
+            <div className="ai-ready-card">
+              <span>AI-Powered Future Ready</span>
+              <p>
+                Saviya will use AI to understand, categorize, and provide smart
+                answer support faster than ever.
+              </p>
             </div>
           </div>
         </section>
 
-        <section className="problem-section">
-          {[
-            "Teacher said bring something tomorrow?",
-            "Not sure about homework?",
-            "Need details about school events?",
-            "Confused about notes from school?",
-            "Need quick guidance from responsible staff?"
-          ].map((item) => (
-            <article className="soft-card" key={item}>
-              <span className="card-dot" />
-              <h3>{item}</h3>
-            </article>
-          ))}
+        <section className="challenge-section">
+          <h2>Struggling with these everyday school challenges?</h2>
+          <div className="challenge-grid">
+            {[
+              ["Bag", "Teacher said carry something tomorrow?"],
+              ["?", "What is the homework for tomorrow?"],
+              ["Note", "When is the next school event?"],
+              ["i", "Need information about school activities?"]
+            ].map(([icon, item]) => (
+              <article className="challenge-card" key={item}>
+                <span>{icon}</span>
+                <h3>{item}</h3>
+              </article>
+            ))}
+          </div>
         </section>
 
-        <section className="content-band">
+        <section className="solution-band">
+          <div className="solution-copy">
+            <h2>Saviya is the simple solution.</h2>
+            <p className="tagline">Ask. Ticket. Track. Get Answered.</p>
+            <p>
+              All your child's school related questions, answered in one trusted
+              place.
+            </p>
+          </div>
+          <div className="solution-metrics">
+            <div><strong>12</strong><span>My Tickets</span></div>
+            <div><strong>5</strong><span>Open</span></div>
+            <div><strong>4</strong><span>In Progress</span></div>
+            <div><strong>3</strong><span>Resolved</span></div>
+          </div>
+        </section>
+
+        <section className="why-section">
+          <h2>Why Parents Love Saviya</h2>
+          <div className="feature-row">
+            {[
+              ["Chat", "Easy Ticketing", "Raise a question in seconds."],
+              ["Find", "Track Progress", "Track your ticket status in real-time."],
+              ["Bell", "Instant Updates", "Get updates when there is a response."],
+              ["Team", "Multiple Channels", "Web, mobile and email support."],
+              ["Safe", "Secure & Private", "Your data is safe and protected."]
+            ].map(([icon, title, text]) => (
+              <article className="feature-card" key={title}>
+                <span>{icon}</span>
+                <h3>{title}</h3>
+                <p>{text}</p>
+              </article>
+            ))}
+          </div>
+        </section>
+
+        <ProductPreview />
+
+        <section className="community-section">
+          <h2>For Everyone in the School Community</h2>
+          <div className="community-grid">
+            <CommunityCard
+              title="For Parents"
+              items={["Raise questions anytime", "Track ticket status", "Get quick responses", "Stay informed"]}
+            />
+            <CommunityCard
+              title="For Staff / Responders"
+              items={["View and manage tickets", "Respond efficiently", "Organize by categories", "Better communication"]}
+            />
+            <CommunityCard
+              title="For Admins"
+              items={["Manage users and staff", "Monitor all tickets", "Reports and analytics", "Improve school service"]}
+            />
+            <article className="community-card ai-community">
+              <h3>Coming Soon with AI</h3>
+              <p>Smart answer suggestions</p>
+              <p>Auto category detection</p>
+              <p>Similar question finder</p>
+              <p>AI chat assistant</p>
+            </article>
+          </div>
+        </section>
+
+        <section className="content-band compact-band">
           <div>
-            <p className="eyebrow">Features</p>
-            <h2>Built for clear parent-school communication</h2>
+            <p className="eyebrow">Saviya for schools</p>
+            <h2>Make School Communication Simple, Fast & Stress Free.</h2>
           </div>
           <div className="feature-grid">
             {[
@@ -349,7 +406,7 @@ function App() {
           </div>
         </section>
 
-        <section className="roles-grid">
+        <section className="roles-grid slim-roles">
           <RoleCard
             title="Parents"
             items={["Raise school questions", "Track ticket status", "Get clear responses"]}
@@ -362,19 +419,6 @@ function App() {
             title="Admins"
             items={["Manage all tickets", "Monitor support performance", "View dashboard analytics"]}
           />
-        </section>
-
-        <section className="ai-band">
-          <div>
-            <p className="eyebrow">Coming Soon with AI</p>
-            <h2>Helpful automation without replacing staff judgement</h2>
-          </div>
-          <div className="ai-list">
-            <span>Smart answer suggestions</span>
-            <span>Auto category detection</span>
-            <span>Similar question finder</span>
-            <span>Sinhala/English parent support assistant</span>
-          </div>
         </section>
 
         <section className="auth-section" id="auth">
@@ -396,6 +440,13 @@ function App() {
           />
         </section>
 
+        <footer className="public-footer">
+          <strong>Make School Communication Simple, Fast & Stress Free.</strong>
+          <span>www.saviya.lk</span>
+          <span>hello@saviya.lk</span>
+          <span>Sri Lanka</span>
+        </footer>
+
         <Feedback notice={notice} error={error} />
       </main>
     );
@@ -404,10 +455,7 @@ function App() {
   return (
     <main className="app-shell">
       <aside className="sidebar">
-        <div className="brand-mark large">
-          <span>saviya</span>
-          <strong>සවිය</strong>
-        </div>
+        <LogoMark size="large" />
         <nav className="side-nav">
           {["dashboard", "tickets", "create"].map((view) => (
             <button
@@ -485,6 +533,91 @@ function App() {
         />
       )}
     </main>
+  );
+}
+
+function LogoMark({ size = "" }) {
+  return (
+    <div className={`brand-lockup ${size}`}>
+      <div className="logo-symbol">S</div>
+      <div>
+        <span>saviya</span>
+        <strong>සවිය</strong>
+      </div>
+    </div>
+  );
+}
+
+function ProductPreview() {
+  const recent = [
+    ["Homework for tomorrow", "Open"],
+    ["Bring stationery items", "In Progress"],
+    ["School sports day details", "Resolved"],
+    ["Maths holiday assignment", "Open"]
+  ];
+
+  return (
+    <section className="product-preview">
+      <div className="desktop-mock">
+        <div className="mock-sidebar">
+          <LogoMark />
+          <span>Dashboard</span>
+          <span>My Tickets</span>
+          <span>Create Ticket</span>
+          <span>Notifications</span>
+        </div>
+        <div className="mock-dashboard">
+          <h3>Dashboard</h3>
+          <div className="mock-stats">
+            <div><strong>12</strong><span>My Tickets</span></div>
+            <div><strong>5</strong><span>Open</span></div>
+            <div><strong>4</strong><span>In Progress</span></div>
+            <div><strong>3</strong><span>Resolved</span></div>
+          </div>
+          <h4>Recent Tickets</h4>
+          {recent.map(([title, status]) => (
+            <div className="mock-row" key={title}>
+              <span>{title}</span>
+              <small>{status}</small>
+            </div>
+          ))}
+        </div>
+      </div>
+
+      <div className="ticket-mock">
+        <span>Ticket #1234</span>
+        <h3>Homework for tomorrow</h3>
+        <p>Teacher said to bring some items tomorrow. Can you please confirm?</p>
+        <button>View Responses</button>
+      </div>
+
+      <div className="response-mock">
+        <h3>Responses</h3>
+        <p>Good morning. Please bring your Maths exercise book and colour pencils tomorrow.</p>
+        <div>Thank you so much!</div>
+      </div>
+
+      <div className="mobile-mock">
+        <LogoMark />
+        <strong>My Tickets</strong>
+        <div className="mock-stats compact">
+          <div><strong>12</strong><span>Total</span></div>
+          <div><strong>5</strong><span>Open</span></div>
+        </div>
+        <button>Create Ticket</button>
+      </div>
+    </section>
+  );
+}
+
+function CommunityCard({ title, items }) {
+  return (
+    <article className="community-card">
+      <h3>{title}</h3>
+      {items.map((item) => (
+        <p key={item}>{item}</p>
+      ))}
+    </article>
   );
 }
 
@@ -594,7 +727,7 @@ function Dashboard({ stats, isStaff }) {
                 <div key={ticket._id}>
                   <strong>{ticket.ticketNo}</strong>
                   <span>{ticket.title}</span>
-                  <small>{labelize(ticket.status)} · {ticket.priority}</small>
+                  <small>{labelize(ticket.status)} - {ticket.priority}</small>
                 </div>
               ))
             )}
@@ -727,7 +860,7 @@ function TicketList({ tickets, loading, onOpen }) {
             <StatusBadge value={ticket.status} />
             <PriorityBadge value={ticket.priority} />
             <span>{ticket.category}</span>
-            <small>{ticket.childName} · {ticket.grade}</small>
+            <small>{ticket.childName} - {ticket.grade}</small>
           </div>
         </article>
       ))}
@@ -757,7 +890,7 @@ function TicketDetail({
             <StatusBadge value={ticket.status} />
             <PriorityBadge value={ticket.priority} />
             <span>{ticket.category}</span>
-            <span>{ticket.childName} · {ticket.grade}</span>
+            <span>{ticket.childName} - {ticket.grade}</span>
           </div>
         </div>
 
